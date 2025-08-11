@@ -1,0 +1,388 @@
+<!-- Save this as index.html and open in your browser -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sankar Prasad Acharya — HTML & CSS Portfolio</title>
+  <meta name="description" content="Portfolio of Sankar Prasad Acharya — HTML & CSS developer from NIST University." />
+
+  <style>
+    /* --------------------------
+       Variables & base styles
+       -------------------------- */
+    :root{
+      --bg: #fafafa;
+      --card: #ffffff;
+      --muted: #6b7280;
+      --accent: #0ea5a4; /* teal */
+      --accent-2: #7c3aed; /* purple */
+      --glass: rgba(255,255,255,0.6);
+      --radius: 12px;
+      --shadow: 0 6px 18px rgba(15,23,42,0.08);
+      --max-width: 1100px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+      --ui: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--ui);
+      background: linear-gradient(180deg, #f7fbfb 0%, var(--bg) 60%);
+      color:#0f172a;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding:48px 20px;
+      display:flex;
+      justify-content:center;
+    }
+
+    .container{
+      width:100%;
+      max-width:var(--max-width);
+    }
+
+    /* --------------------------
+       Header / Hero
+       -------------------------- */
+    header{
+      display:flex;
+      align-items:center;
+      gap:24px;
+      margin-bottom:28px;
+    }
+    .avatar{
+      width:96px;
+      height:96px;
+      border-radius:16px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      font-weight:700;
+      font-size:28px;
+      box-shadow: var(--shadow);
+      flex-shrink:0;
+    }
+
+    .hero h1{
+      margin:0 0 6px 0;
+      font-size:22px;
+      letter-spacing:0.2px;
+    }
+    .hero p{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+    .meta{
+      margin-top:10px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .badge{
+      background:var(--card);
+      padding:6px 10px;
+      border-radius:999px;
+      box-shadow:var(--shadow);
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    /* --------------------------
+       Layout
+       -------------------------- */
+    main{
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:28px;
+      align-items:start;
+    }
+
+    /* Left column */
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow:var(--shadow);
+    }
+
+    section + section{margin-top:18px}
+
+    /* About */
+    .about p{margin:0 0 8px 0; color:var(--muted)}
+    .cta-row{
+      margin-top:12px;
+      display:flex;
+      gap:12px;
+    }
+    .btn{
+      padding:10px 14px;
+      border-radius:10px;
+      border:0;
+      cursor:pointer;
+      font-weight:600;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:#fff;
+      box-shadow:0 8px 20px rgba(124,58,237,0.14);
+      text-decoration:none;
+    }
+    .btn.ghost{
+      background:transparent;
+      border:1px solid rgba(15,23,42,0.06);
+      color:var(--muted);
+      box-shadow:none;
+    }
+
+    /* Skills */
+    .skills-list{display:flex;flex-direction:column;gap:12px}
+    .skill{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:center;
+    }
+    .skill .bar{
+      flex:1;
+      height:10px;
+      background:#f3f4f6;
+      border-radius:999px;
+      overflow:hidden;
+      margin-left:12px;
+      box-shadow:inset 0 -1px 0 rgba(0,0,0,0.02);
+    }
+    .skill .bar > i{
+      display:block;
+      height:100%;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      border-radius:999px;
+      transition:width 700ms ease;
+    }
+
+    /* Projects grid */
+    .projects-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+    }
+    .proj{
+      background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4));
+      border-radius:10px;
+      padding:10px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      transition:transform .18s ease, box-shadow .18s ease;
+      cursor:pointer;
+    }
+    .proj:hover{ transform:translateY(-6px); box-shadow:0 18px 30px rgba(2,6,23,0.06)}
+    .thumb{
+      width:86px;
+      height:60px;
+      border-radius:8px;
+      background:linear-gradient(90deg,#e6f7f6,#eef2ff);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--muted);
+      font-size:12px;
+      flex-shrink:0;
+      border:1px solid rgba(15,23,42,0.03);
+    }
+    .proj h4{margin:0;font-size:14px}
+    .proj p{margin:6px 0 0 0;color:var(--muted);font-size:12px}
+
+    /* Right column (sidebar) */
+    .sidebar{
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+      position:sticky;
+      top:24px;
+    }
+
+    .contact-list{display:flex;flex-direction:column;gap:8px}
+    .contact-item{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      padding:8px;
+      border-radius:10px;
+      background:linear-gradient(180deg,#fff,#fff);
+      border:1px solid rgba(15,23,42,0.03);
+    }
+    .contact-item small{display:block;color:var(--muted);font-size:12px}
+    .contact-item a{color:var(--accent-2); text-decoration:none; font-weight:600; font-size:14px}
+
+    /* Footer */
+    footer{margin-top:28px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* Responsive */
+    @media (max-width:960px){
+      main{grid-template-columns:1fr; padding-bottom:40px}
+      .projects-grid{grid-template-columns:repeat(1,1fr)}
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+    <div class="avatar">
+      <img src="profile.jpg" alt="Sankar Prasad Acharya">
+    </div>
+
+      <div class="hero">
+        <h1>Sankar Prasad Acharya</h1>
+        <p>Front‑end Developer — HTML &amp; CSS • NIST University</p>
+
+        <div class="meta">
+          <span class="badge">NIST University</span>
+          <span class="badge">HTML • CSS</span>
+          <span class="badge">Responsive Design</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- LEFT COLUMN -->
+      <div>
+        <!-- About -->
+        <section class="card about" id="about" aria-labelledby="about-heading">
+          <h3 id="about-heading">About Me</h3>
+          <p>
+            Hi — I’m Sankar Prasad Acharya, a student at <strong>NIST University</strong> focusing on front-end development using HTML and CSS.
+            I build responsive, accessible, and clean user interfaces with attention to detail and mobile-first design.
+          </p>
+
+          <div class="cta-row" aria-hidden="false">
+            <a class="btn" href="#projects">See Projects</a>
+            <a class="btn ghost" href="mailto:sankarprasadacharjya@gmail.com">sankarprasadacharjya@gmail.com</a>
+          </div>
+        </section>
+
+        <!-- Skills -->
+        <section class="card" id="skills" aria-labelledby="skills-heading">
+          <h3 id="skills-heading">Skills</h3>
+
+          <div class="skills-list" role="list">
+            <div class="skill" role="listitem">
+              <div style="min-width:90px">HTML</div>
+              <div class="bar" aria-hidden="true"><i style="width:92%"></i></div>
+            </div>
+
+            <div class="skill" role="listitem">
+              <div style="min-width:90px">CSS</div>
+              <div class="bar" aria-hidden="true"><i style="width:88%"></i></div>
+            </div>
+
+            <div class="skill" role="listitem">
+              <div style="min-width:90px">Responsive Layouts</div>
+              <div class="bar" aria-hidden="true"><i style="width:80%"></i></div>
+            </div>
+
+            <div class="skill" role="listitem">
+              <div style="min-width:90px">CSS Animations</div>
+              <div class="bar" aria-hidden="true"><i style="width:72%"></i></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Projects -->
+        <section class="card" id="projects" aria-labelledby="projects-heading">
+          <h3 id="projects-heading">Selected Projects</h3>
+
+          <div class="projects-grid" role="list">
+            <article class="proj" role="listitem" tabindex="0" aria-labelledby="p1">
+              <div class="thumb">Demo 1</div>
+              <div>
+                <h4 id="p1">Responsive Landing Page</h4>
+                <p>Landing page built with semantic HTML and CSS grid. Mobile-first layout.</p>
+              </div>
+            </article>
+
+            <article class="proj" role="listitem" tabindex="0" aria-labelledby="p2">
+              <div class="thumb">Demo 2</div>
+              <div>
+                <h4 id="p2">Portfolio Grid</h4>
+                <p>Project gallery using CSS grid and hover effects. No JavaScript required.</p>
+              </div>
+            </article>
+
+            <article class="proj" role="listitem" tabindex="0" aria-labelledby="p3">
+              <div class="thumb">Demo 3</div>
+              <div>
+                <h4 id="p3">CSS Animations</h4>
+                <p>Micro-interactions and animated UI components using keyframes and transitions.</p>
+              </div>
+            </article>
+
+            <article class="proj" role="listitem" tabindex="0" aria-labelledby="p4">
+              <div class="thumb">Demo 4</div>
+              <div>
+                <h4 id="p4">Resume Page</h4>
+                <p>Clean resume-style portfolio with print-friendly CSS and accessible markup.</p>
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <!-- RIGHT COLUMN / SIDEBAR -->
+      <aside class="sidebar">
+        <div class="card">
+          <h4>Contact</h4>
+          <div class="contact-list">
+            <div class="contact-item">
+              <div>
+                <small>University</small>
+                <div>NIST University</div>
+              </div>
+            </div>
+
+            <div class="contact-item" aria-label="Email">
+              <div>
+                <small>Email</small>
+                <a href="mailto:sankarprasadacharjya.com">sankarprasadacharjya.com</a>
+              </div>
+            </div>
+
+            <div class="contact-item" aria-label="Location">
+              <div>
+                <small>Location</small>
+                <div>India</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h4>Quick Links</h4>
+           <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+             <a class="btn ghost" href="#projects">Projects</a>
+             <a class="btn ghost" href="#skills">Skills</a>
+             <a class="btn ghost" href="#about">About</a>
+             <a class="btn ghost" href="https://instagram.com/_sankar2005_" target="_blank">Instagram</a>
+             </div>
+        </div>
+        <div class="card">
+          <h4>Notes</h4>
+          <p style="margin:0;color:var(--muted);font-size:13px">
+            This portfolio template uses only HTML and CSS — perfect for showing off front‑end fundamentals. Replace demo thumbnails with real screenshots and update the email to connect with recruiters.
+          </p>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      © <strong>Sankar Prasad Acharya</strong> — NIST University • Built with HTML &amp; CSS
+    </footer>
+  </div>
+</body>
+</html>
